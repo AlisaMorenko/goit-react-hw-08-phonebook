@@ -1,46 +1,54 @@
-import { useDispatch } from 'react-redux';
-import { getContacts } from './redux/phonebook-operations';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
+import authOperations from './redux/Auth/auth-operations';
+import authSelectors from './redux/Auth/auth-selectors';
+import PrivateRoute from './components/PrivatRoute';
+import PublicRoute from './components/PublicRoute';
 
 import AppMenu from './components/AppMenu';
-import ContactForm from './components/ContactForm';
-import ContactList from './components/ContactList';
-import Filter from './components/Filter';
+import Home from './View/Home';
+import ContactView from './View/ContactView';
 import NotFoundView from './components/NotFoundView/NotFoundView';
+import Login from './View/Login';
+import Register from './View/Register';
 
 export default function App() {
   const dispatch = useDispatch();
-  dispatch(getContacts());
+
+  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
 
   return (
-    <>
-      <AppMenu />
-      {/* <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      <Filter />
-      <ContactList /> */}
-      <Switch>
-        <Route path="/register" exact>
-          {/* <MoviesPage /> */}
-        </Route>
+    !isFetchingCurrentUser && (
+      <>
+        <AppMenu />
 
-        <Route path="/login" exact>
-          {/* <MoviesPage /> */}
-        </Route>
+        <Switch>
+          <PublicRoute path="/" exact>
+            <Home />
+          </PublicRoute>
 
-        <Route path="/contacts" exact>
-          <h1>Phonebook</h1>
-          <ContactForm />
-          <h2>Contacts</h2>
-          <Filter />
-          <ContactList />
-        </Route>
+          <PublicRoute path="/register" restricted>
+            <Register />
+          </PublicRoute>
 
-        <Route>
-          <NotFoundView />
-        </Route>
-      </Switch>
-    </>
+          <PublicRoute path="/login" restricted>
+            <Login />
+          </PublicRoute>
+
+          <PrivateRoute path="/contacts">
+            <ContactView />
+          </PrivateRoute>
+
+          <Route>
+            <NotFoundView />
+          </Route>
+        </Switch>
+      </>
+    )
   );
 }

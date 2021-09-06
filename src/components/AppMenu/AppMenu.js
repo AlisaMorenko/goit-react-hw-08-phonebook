@@ -1,11 +1,25 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import styles from './AppMenu.module.css';
+import { useSelector } from 'react-redux';
+// import { NavLink } from 'react-router-dom';
+import Navigation from '../Navigation';
+import AuthNav from '../AuthNav';
+import UserMenu from '../UserMenu';
+import authSelectors from '../../redux/Auth/auth-selectors';
 
 export default function AppMenu() {
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   return (
-    <nav>
-      <NavLink
+    <header>
+      {/* <NavLink
+        exact
+        to="/"
+        className={styles.link}
+        activeClassName={styles.linkActive}
+      >
+        Home
+      </NavLink> */}
+
+      {/* <NavLink
         exact
         to="/register"
         className={styles.link}
@@ -13,6 +27,7 @@ export default function AppMenu() {
       >
         Sign up
       </NavLink>
+
       <NavLink
         exact
         to="/login"
@@ -20,15 +35,18 @@ export default function AppMenu() {
         activeClassName={styles.linkActive}
       >
         Sign in
-      </NavLink>
-      <NavLink
+      </NavLink> */}
+      <Navigation />
+      {isLoggedIn ? <UserMenu /> : <AuthNav />}
+
+      {/* <NavLink ///////////////////////временно
         exact
         to="/contacts"
         className={styles.link}
         activeClassName={styles.linkActive}
       >
         Contacts
-      </NavLink>
-    </nav>
+      </NavLink> */}
+    </header>
   );
 }

@@ -1,41 +1,7 @@
-// import { configureStore } from '@reduxjs/toolkit';
-// import {
-//   persistStore,
-//   persistReducer,
-//   FLUSH,
-//   REHYDRATE,
-//   PAUSE,
-//   PERSIST,
-//   PURGE,
-//   REGISTER,
-// } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
-// import phonebookReducer from './phonebook-reducers';
-
-// export const persistConfig = {
-//   key: 'contacts',
-//   storage,
-//   blacklist: ['filter'],
-// };
-
-// export const store = configureStore({
-//   reducer: { contacts: persistReducer(persistConfig, phonebookReducer) },
-//   middleware: getDefaultMiddleware =>
-//     getDefaultMiddleware({
-//       serializableCheck: {
-//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//       },
-//     }),
-//   devTools: process.env.NODE_ENV === 'development',
-// });
-
-// export const persistor = persistStore(store);
-
-//1.0
 import { configureStore } from '@reduxjs/toolkit';
 import {
-  // persistStore,
-  // persistReducer, ***********удаляем local storage
+  persistStore,
+  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -43,17 +9,38 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';***********удаляем local storage
-import phonebookReducer from './phonebook-reducers';
+import storage from 'redux-persist/lib/storage';
+import phonebookReducer from './Phonebook/phonebook-reducers';
+import authReducer from './Auth/auth-slice';
 
-// export const persistConfig = { **************удалили local storage
-//   key: 'contacts',
+// const middleware = [
+//   //если заменить на GetDefaultMiddlewareOptions ошибка пропадает, так же репета вроде что рассказівал
+//   ...getDefaultMiddleware({
+//     serializableCheck: {
+//       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//     },
+//   }),
+// ];
+//немного другой персистконфиг:
+
+// const persistConfig = { ---------------const authPersistConfig = {
+//   key: 'contacts',-----------------------key: 'auth',
 //   storage,
-//   blacklist: ['filter'],
-// };                              *************удалили local storage
+//   blacklist: ['filter'],-----------------whitelist: ['token'],
+// };
+
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+};
 
 export const store = configureStore({
-  reducer: { contacts: phonebookReducer },
+  reducer: {
+    auth: persistReducer(authPersistConfig, authReducer),
+    contacts: phonebookReducer,
+  },
+  // reducer: { contacts: phonebookReducer }, мой, кот біл
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -63,4 +50,4 @@ export const store = configureStore({
   devTools: process.env.NODE_ENV === 'development',
 });
 
-// export const persistor = persistStore(store);
+export const persistor = persistStore(store);

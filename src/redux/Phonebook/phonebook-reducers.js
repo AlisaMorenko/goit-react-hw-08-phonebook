@@ -11,10 +11,10 @@ import {
   getContactsRequest,
   getContactsSuccess,
   getContactsError,
-} from './phonebook-actions';
-import initialContacts from '../contacts.json';
+} from './phonebook-actions.js';
+// import initialContacts from '../../contacts.json';
 
-const items = createReducer(initialContacts, {
+const items = createReducer([], {
   [getContactsSuccess]: (_, { payload }) => payload,
   [addContactSuccess]: (state, { payload }) => [...state, payload],
   [delContactSuccess]: (state, { payload }) =>

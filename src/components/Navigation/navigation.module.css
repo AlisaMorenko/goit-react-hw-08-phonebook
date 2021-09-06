@@ -1,0 +1,10 @@
+.link {
+  color: #dc0305;
+  margin: 0px 10px;
+}
+
+.linkActive {
+  color: rgb(239, 100, 14);
+  font-size: large;
+  font-weight: bold;
+}

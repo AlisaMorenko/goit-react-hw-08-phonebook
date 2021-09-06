@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from 'react-loader-spinner';
-import { delContact } from '../../redux/phonebook-operations';
+import { delContact } from '../../redux/Phonebook/phonebook-operations';
 import {
   getVisibleContacts,
   getLoading,
-} from '../../redux/phonebook-selectors';
+} from '../../redux/Phonebook/phonebook-selectors';
 import ContactListItem from '../ContactListItem';
 
 // import { error} from '../../redux/phonebook-selectors';
