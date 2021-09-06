@@ -12,7 +12,6 @@ import {
   getContactsSuccess,
   getContactsError,
 } from './phonebook-actions.js';
-// import initialContacts from '../../contacts.json';
 
 const items = createReducer([], {
   [getContactsSuccess]: (_, { payload }) => payload,

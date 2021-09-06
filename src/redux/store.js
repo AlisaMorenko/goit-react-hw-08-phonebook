@@ -13,22 +13,6 @@ import storage from 'redux-persist/lib/storage';
 import phonebookReducer from './Phonebook/phonebook-reducers';
 import authReducer from './Auth/auth-slice';
 
-// const middleware = [
-//   //если заменить на GetDefaultMiddlewareOptions ошибка пропадает, так же репета вроде что рассказівал
-//   ...getDefaultMiddleware({
-//     serializableCheck: {
-//       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//     },
-//   }),
-// ];
-//немного другой персистконфиг:
-
-// const persistConfig = { ---------------const authPersistConfig = {
-//   key: 'contacts',-----------------------key: 'auth',
-//   storage,
-//   blacklist: ['filter'],-----------------whitelist: ['token'],
-// };
-
 const authPersistConfig = {
   key: 'auth',
   storage,
