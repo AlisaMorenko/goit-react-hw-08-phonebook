@@ -5,6 +5,7 @@ import { getContacts } from '../../redux/Phonebook/phonebook-selectors';
 import shortid from 'shortid';
 
 import styles from './contactForm.module.css';
+import Button from '@material-ui/core/Button';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
@@ -87,9 +88,15 @@ export default function ContactForm() {
           className={styles.input}
         />
       </label>
-      <button type="submit" className={styles.button}>
+
+      <Button
+        variant="contained"
+        color="primary"
+        type="submit"
+        className={styles.button}
+      >
         add contact
-      </button>
+      </Button>
     </form>
   );
 }

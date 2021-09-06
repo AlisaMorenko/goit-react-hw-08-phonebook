@@ -2,7 +2,18 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import authOperations from '../../redux/Auth/auth-operations';
 
-// import styles from './login.module.css';
+import styles from './login.module.css';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+const useStyles = makeStyles(theme => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+}));
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -26,15 +37,14 @@ const Login = () => {
     setEmail('');
     setPassword('');
   };
-
+  const classes = useStyles();
   return (
-    <div>
-      <h1>Страница логина</h1>
-
-      <form onSubmit={handleSubmit} autoComplete="off">
+    <div className={styles.register}>
+      <form className={classes.root} onSubmit={handleSubmit} autoComplete="off">
         <label>
-          Почта
-          <input
+          <TextField
+            id="standard-basic"
+            label="email"
             type="email"
             name="email"
             value={email}
@@ -43,8 +53,9 @@ const Login = () => {
         </label>
 
         <label>
-          Пароль
-          <input
+          <TextField
+            id="standard-basic"
+            label="Password"
             type="password"
             name="password"
             value={password}
@@ -52,7 +63,9 @@ const Login = () => {
           />
         </label>
 
-        <button type="submit">Войти</button>
+        <Button variant="contained" color="primary" type="submit">
+          Sign in
+        </Button>
       </form>
     </div>
   );

@@ -2,7 +2,18 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import authOperations from '../../redux/Auth/auth-operations';
 
-// import name from './register.module.css';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import styles from './register.module.css';
+const useStyles = makeStyles(theme => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+}));
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -30,20 +41,25 @@ const Register = () => {
     setEmail('');
     setPassword('');
   };
-
+  const classes = useStyles();
   return (
-    <div>
-      <h1>Страница регистрации</h1>
-
-      <form onSubmit={handleSubmit} autoComplete="off">
+    <div className={styles.register}>
+      <form className={classes.root} onSubmit={handleSubmit} autoComplete="off">
         <label>
-          Имя
-          <input type="text" name="name" value={name} onChange={handleChange} />
+          <TextField
+            id="standard-basic"
+            label="Name"
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleChange}
+          />
         </label>
 
         <label>
-          Почта
-          <input
+          <TextField
+            id="standard-basic"
+            label="email"
             type="email"
             name="email"
             value={email}
@@ -52,8 +68,9 @@ const Register = () => {
         </label>
 
         <label>
-          Пароль
-          <input
+          <TextField
+            id="standard-basic"
+            label="Password"
             type="password"
             name="password"
             value={password}
@@ -61,7 +78,14 @@ const Register = () => {
           />
         </label>
 
-        <button type="submit">Зарегистрироваться</button>
+        <Button
+          variant="contained"
+          color="primary"
+          className={styles.button}
+          type="submit"
+        >
+          Sign Up
+        </Button>
       </form>
     </div>
   );

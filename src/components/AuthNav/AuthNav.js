@@ -5,7 +5,7 @@ import styles from './AuthNav.module.css';
 
 const AuthNav = () => {
   return (
-    <div>
+    <div className={styles.nav}>
       <NavLink
         exact
         to="/register"

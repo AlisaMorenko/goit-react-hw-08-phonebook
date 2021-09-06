@@ -1,10 +1,21 @@
 .link {
-  color: #dc0305;
-  margin: 0px 10px;
+  display: inline-block;
+  color: #3f51b5;
+  margin: 10px;
+  border: 1px solid #3f51b5;
+  padding: 5px 10px;
+  background-color: #fff;
 }
 
 .linkActive {
-  color: rgb(239, 100, 14);
+  composes: link;
+  color: #303f9f;
   font-size: large;
   font-weight: bold;
+  border: 1px solid #303f9f;
+}
+
+.nav {
+  display: inline-flex;
+  justify-content: flex-end;
 }
