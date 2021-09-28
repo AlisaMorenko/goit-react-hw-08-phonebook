@@ -44,7 +44,7 @@ const Login = () => {
         <label>
           <TextField
             id="standard-basic"
-            label="email"
+            label="Email"
             type="email"
             name="email"
             value={email}

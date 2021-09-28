@@ -4,8 +4,9 @@ body {
   padding-right: 15px;
 }
 
-li {
+ul {
   list-style: none;
+  padding: 0px;
 }
 
 a {

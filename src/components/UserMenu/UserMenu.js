@@ -9,7 +9,7 @@ export default function UserMenu() {
   const email = useSelector(authSelectors.getUserEmail);
 
   return (
-    <div>
+    <div className={styles.block}>
       <span className={styles.span}>{email}</span>
       <button
         className={styles.button}
