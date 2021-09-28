@@ -2,11 +2,7 @@ h1 {
   margin: 0px;
   padding: 20px 0px 0px 20px;
 }
-p {
-  margin: 20px;
-  font-size: 20px;
-  font-weight: bold;
-}
+
 .bgPic {
   display: block;
   background-image: url(./thumb_l_nus_10111.jpg);
